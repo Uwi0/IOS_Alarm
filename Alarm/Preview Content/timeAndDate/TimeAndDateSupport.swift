@@ -28,3 +28,13 @@ func getTimeComponent(date: Date) -> TimeComponent {
         year: components.year ?? 0
     )
 }
+
+func getTimeFromDate(date: Date) -> String {
+    let result = getTimeComponent(date: date)
+    let time = String(format: "%02d:%02d", result.hour, result.minute)
+    return time
+}
+
+func addHourToDate(date: Date, numHours: Int, numMinutes: Int) -> Date {
+    date.addingTimeInterval(TimeInterval((numMinutes * 60) + (numHours * 60 * 60)))
+}

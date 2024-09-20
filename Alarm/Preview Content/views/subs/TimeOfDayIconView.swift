@@ -27,10 +27,20 @@ struct TimeOfDayIconView: View {
     }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image(systemName: image.name)
+            .foregroundColor(image.color)
+            .imageScale(.large)
     }
 }
 
 #Preview {
-    TimeOfDayIconView(date: Date())
+    
+    List(0..<24) { i in
+        let theDate = addHourToDate(date: Date(), numHours: i, numMinutes: 0)
+        HStack {
+            Text(getTimeFromDate(date: theDate))
+            Spacer()
+            TimeOfDayIconView(date: theDate)
+        }
+    }
 }
