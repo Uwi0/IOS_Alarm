@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Alarm
-//
-//  Created by dwi prasetyo on 20/09/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
