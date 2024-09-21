@@ -19,8 +19,8 @@ struct SplashScreenView: View {
                 
                 VStack {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text("Hello there")
-                        Text("let's add an alarm")
+                        CoolTextView(text: "Hello there", size: fontSize)
+                        CoolTextView(text: "let's add an alarm", size: fontSize)
                     }
                     .multilineTextAlignment(.leading)
                     .padding()
