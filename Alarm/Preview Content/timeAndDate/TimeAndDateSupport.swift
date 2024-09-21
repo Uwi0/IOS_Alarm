@@ -47,7 +47,7 @@ func formatDate(date: Date) -> String {
     return "\(result.day)-\(result.month)-\(result.year)(\(result.hour):\(result.minute))"
 }
 
-func dateTimToModel(date: Date) -> TimeModel {
+func dateTimeToModel(date: Date) -> TimeModel {
     let result = getTimeComponent(date: date)
     return TimeModel(hours: result.hour, minutes: result.minute)
 }
