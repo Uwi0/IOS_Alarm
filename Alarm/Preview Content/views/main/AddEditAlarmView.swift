@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AddEditAlarm: View {
+struct AddEditAlarmView: View {
     
     let currentAlarmIndex: Int?
     @State var alarmModel: AlarmModel
@@ -29,5 +29,5 @@ struct AddEditAlarm: View {
 }
 
 #Preview {
-    AddEditAlarm(currentAlarmIndex: nil, alarmModel: .DefaultAlarm())
+    AddEditAlarmView(currentAlarmIndex: nil, alarmModel: .DefaultAlarm())
 }
