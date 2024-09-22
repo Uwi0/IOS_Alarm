@@ -31,7 +31,25 @@ struct SplashScreenView: View {
                         }
                     }
                     Spacer()
-                    Text("Image")
+                    Image(welcome)
+                        .resizable()
+                        .scaledToFit()
+                        .opacity(0.7)
+                    Spacer()
+                    
+                }
+            }
+            .opacity(opacity)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                    withAnimation {
+                        isActive.toggle()
+                    }
+                }
+            }
+            .onTapGesture {
+                withAnimation {
+                    isActive.toggle()
                 }
             }
         }
