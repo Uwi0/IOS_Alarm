@@ -44,6 +44,16 @@ struct CircularTimeView: View {
                 rotateCircleOffset: rotateCircleOffset,
                 color: .gray
             )
+            DisplayIconCircularTimeView(
+                time: startTime,
+                size: size,
+                percent: startDateToPercent
+            )
+            DisplayIconCircularTimeView(
+                time: endTime,
+                size: size,
+                percent: endDateToPercent
+            )
         }
     }
 }
