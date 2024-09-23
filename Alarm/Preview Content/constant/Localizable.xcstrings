@@ -1,7 +1,39 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "About" : {
 
+    },
+    "Enable" : {
+
+    },
+    "Enabled Notifications, please" : {
+
+    },
+    "Hello there" : {
+
+    },
+    "Hello, world!" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "let's add an alarm" : {
+
+    },
+    "The UI for this nice Alarm app was largely inspired by the amazing work of Anton Leogky." : {
+
+    },
+    "to Anton's page" : {
+
+    },
+    "ToBeWakeUpView" : {
+
+    },
+    "you did it! here you can manage your alarm, change time and other things" : {
+
+    }
   },
   "version" : "1.0"
 }
