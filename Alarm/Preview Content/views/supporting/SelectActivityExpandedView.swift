@@ -10,12 +10,12 @@ struct SelectActivityExpandedView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 35) {
             FirstColumnOfActivityIconView(
                 currentActivity: currentActivity,
                 currentColor: currentColor,
-                currentColorIndex: currentColorIndex,
-                circleFrame: circleFrame
+                circleFrame: circleFrame,
+                onSelectedIndex: { i in currentColorIndex = i}
             )
             ScrollView(.horizontal, showsIndicators: false) {
                 SecondColumnOfActivityIconView(
@@ -24,34 +24,42 @@ struct SelectActivityExpandedView: View {
                 )
             }
         }
+        .padding()
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(nickel, lineWidth: 1)
+                
+        }
     }
 }
 
 private struct FirstColumnOfActivityIconView: View {
     
-    @State var currentActivity: String
-    @State var currentColor: Color
-    @State var currentColorIndex: Int
+    let currentActivity: String
+    let currentColor: Color
     var circleFrame: CGFloat
+    var onSelectedIndex: (Int) -> Void
     
     var body: some View {
         HStack(spacing: 30) {
-            ForEach(0 ..< mainColors.count, id:\.self) { i in
+            ForEach(0 ..< mainColors.count,id: \.self) { i in
                 let color = mainColors[i]
-                let isSelected = color == currentColor
+                let isSelectedColor = color == currentColor
                 
                 Circle()
                     .fill(color)
                     .frame(width: circleFrame, height: circleFrame)
                     .shadow(color: color.opacity(0.7), radius: 10, x: 0, y: 5)
-                    .scaleEffect(isSelected ? 1.1 : 1)
-                    .overlay {
+                    .scaleEffect(isSelectedColor ? 1.1 : 1.0)
+                    .overlay(
                         Circle()
-                            .stroke(lineWidth: isSelected ? 3 : 0.5)
-                    }
+                            .stroke(
+                                lineWidth: isSelectedColor ? 3 : 0.5
+                            )
+                    )
                     .onTapGesture {
                         withAnimation {
-                            currentColorIndex = i
+                            onSelectedIndex(i)
                         }
                     }
             }
@@ -88,6 +96,7 @@ private struct SecondColumnOfActivityIconView: View {
                     )
             }
         }
+        .padding(.horizontal)
     }
 }
 

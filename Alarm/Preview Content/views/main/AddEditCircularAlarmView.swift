@@ -18,6 +18,11 @@ struct AddEditCircularAlarmView: View {
                 alarmModel: alarmModel
             )
             Spacer()
+            SelectActivityExpandedView(
+                currentColorIndex: $alarmModel.colorIndex,
+                currentActivity: $alarmModel.activity
+            )
+                
         }
         .padding()
     }
