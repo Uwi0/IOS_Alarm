@@ -3,14 +3,48 @@ import SwiftUI
 struct CircularTimeView: View {
     let currentAlarmIndex: Int?
     let size: CGFloat
-    @State var alarModel: AlarmModel
+    @State var alarmModel: AlarmModel
+    
+    private var startTime: Date {
+        alarmModel.start
+    }
+    private var endTime: Date {
+        alarmModel.end
+    }
+    private var percentDifference: CGFloat {
+        let startPercent = dateToPercent(date: startTime)
+        let endPercent = dateToPercent(date: endTime)
+        let value = endPercent - startPercent
+        return value >= 0 ? value : 1 + value
+    }
+    private var startDateToPercent: CGFloat {
+        dateToPercent(date: startTime)
+    }
+    private var endDateToPercent: CGFloat {
+        startDateToPercent + percentDifference
+    }
+    private var rotateCircleOffset: CGFloat {
+        360 * startDateToPercent
+    }
+    
     var body: some View {
-        Circle()
-            .stroke(lineWidth: 20)
-            .frame(width: size, height: size)
-            .overlay {
-                Text("Circular Alarm")
-            }
+        ZStack {
+            CentralDatePickerView(size: size, alarmModel: $alarmModel)
+            TimeArcView(
+                percentDifference: percentDifference,
+                srtokeStyle: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round),
+                size: size,
+                rotateCircleOffset: rotateCircleOffset,
+                color: .black
+            )
+            TimeArcView(
+                percentDifference: percentDifference,
+                srtokeStyle: StrokeStyle(lineWidth: 15, dash: [1, 2]),
+                size: size,
+                rotateCircleOffset: rotateCircleOffset,
+                color: .gray
+            )
+        }
     }
 }
 
@@ -18,6 +52,6 @@ struct CircularTimeView: View {
     CircularTimeView(
         currentAlarmIndex: nil,
         size: screenWidth / 2,
-        alarModel: .DefaultAlarm()
+        alarmModel: .DefaultAlarm()
     )
 }
