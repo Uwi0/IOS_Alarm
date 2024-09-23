@@ -34,7 +34,7 @@ struct AlarmModel: Identifiable {
             sound: Sounds.lagrima,
             alarmEnabled: false,
             start: Date(),
-            end: addHourToDate(date: Date(), numHours: 4, numMinutes: 0),
+            end: Date(),
             activity: activities[0],
             colorIndex: 0
         )
