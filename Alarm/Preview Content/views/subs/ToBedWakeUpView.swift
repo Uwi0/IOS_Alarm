@@ -6,7 +6,7 @@ struct ToBedWakeUpView: View {
     
     var body: some View {
         VStack {
-            CancelSaveAlarm(currentAlarmIndex: currentAlarmIndex, alarmModel: $alarmModel)
+            CancelSaveAlarmView(currentAlarmIndex: currentAlarmIndex, alarmModel: $alarmModel)
             AlarmToggleView(alarmEnabled: $alarmModel.alarmEnabled)
             Divider()
             HStack {

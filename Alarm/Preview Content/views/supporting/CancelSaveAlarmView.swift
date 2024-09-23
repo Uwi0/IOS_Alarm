@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CancelSaveAlarm: View {
+struct CancelSaveAlarmView: View {
     let currentAlarmIndex: Int?
     @Binding var alarmModel: AlarmModel
     
@@ -34,5 +34,5 @@ struct CancelSaveAlarm: View {
 }
 
 #Preview {
-    CancelSaveAlarm(currentAlarmIndex: nil, alarmModel: .constant(.DefaultAlarm()))
+    CancelSaveAlarmView(currentAlarmIndex: nil, alarmModel: .constant(.DefaultAlarm()))
 }
