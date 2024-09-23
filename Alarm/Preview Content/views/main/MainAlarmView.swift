@@ -3,7 +3,7 @@ import SwiftUI
 struct MainAlarmView: View {
     var body: some View {
         TabView {
-            AddEditAlarmView(currentAlarmIndex: nil, alarmModel: .DefaultAlarm())
+            ListOfAlarmView(alarms: AlarmModel.DummyAlarmData())
                 .tabItem {
                     Label("Alarm", systemImage: "alarm.fill")
                 }

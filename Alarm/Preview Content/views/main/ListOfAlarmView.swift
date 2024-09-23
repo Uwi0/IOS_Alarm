@@ -6,26 +6,35 @@ struct ListOfAlarmView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(0..<alarms.count, id: \.self) { index in
-                    let alarm = alarms[index]
-                    NavigationLink(
-                        destination: {
-                            Text("Date for alarm \(index)")
-                        },
-                        label: {
-                            Image(systemName: alarm.activity)
-                                .foregroundStyle(alarm.activityColor)
-                            Text("Alarm Row View")
-                        })
+            ZStack {
+                List {
+                    ForEach(0..<alarms.count, id: \.self) { index in
+                        let alarm = alarms[index]
+                        NavigationLink(
+                            destination: {
+                                AddEditAlarmView(
+                                    currentAlarmIndex: index,
+                                    alarmModel: alarm
+                                )
+                            },
+                            label: {
+                                Image(systemName: alarm.activity)
+                                    .foregroundStyle(alarm.activityColor)
+                                Text("Alarm Row View")
+                            })
+                    }
                 }
+                FourCoolCirclesView().opacity(0.3)
             }
             .navigationTitle("Alarms")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     NavigationLink(
                         destination: {
-                            Text("Create new Alarm")
+                            AddEditAlarmView(
+                                currentAlarmIndex: nil,
+                                alarmModel: .DefaultAlarm()
+                            )
                         },
                         label: {
                             Text("+")
