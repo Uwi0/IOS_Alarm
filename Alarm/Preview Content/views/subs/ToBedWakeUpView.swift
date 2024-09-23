@@ -30,7 +30,10 @@ struct ToBedWakeUpView: View {
                         Image(systemName: alarmModel.activity)
                             .foregroundStyle(alarmModel.activityColor)
                             .font(.headline)
-                        Text("SelectActivityView")
+                        SelectActivityView(
+                            currentColorIndex: $alarmModel.colorIndex,
+                            currentActivity: $alarmModel.activity
+                        )
                     }
                     GridRow {
                         HStack {
