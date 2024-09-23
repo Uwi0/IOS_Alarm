@@ -18,9 +18,7 @@ struct ListOfAlarmView: View {
                                 )
                             },
                             label: {
-                                Image(systemName: alarm.activity)
-                                    .foregroundStyle(alarm.activityColor)
-                                Text("Alarm Row View")
+                                AlarmRowView(model: alarm, index: index)
                             })
                     }
                 }
