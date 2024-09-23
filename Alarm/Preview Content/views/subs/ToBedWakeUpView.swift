@@ -7,7 +7,7 @@ struct ToBedWakeUpView: View {
     var body: some View {
         VStack {
             CancelSaveAlarm(currentAlarmIndex: currentAlarmIndex, alarmModel: $alarmModel)
-            Text("Toggle Alarm")
+            AlarmToggleView(alarmEnabled: $alarmModel.alarmEnabled)
             Divider()
             HStack {
                 Grid {
@@ -16,7 +16,7 @@ struct ToBedWakeUpView: View {
                             .font(.largeTitle)
                         VStack(alignment: .leading) {
                             GrayedTextView(text: "Start")
-                            Text("Time Picker")
+                            TimePickerView(time: $alarmModel.start, scale: 1.3)
                         }
                     }
                     GridRow {
@@ -43,7 +43,7 @@ struct ToBedWakeUpView: View {
                         TimeOfDayIconView(date: alarmModel.start)
                             .font(.largeTitle)
                         VStack(alignment: .leading) {
-                            Text("Time Picker")
+                            TimePickerView(time: $alarmModel.end, scale: 1.3)
                             GrayedTextView(text: "End")
                         }
                     }
