@@ -59,6 +59,7 @@ struct ListOfAlarmView: View {
             //TODO: Remove reqquest from given id
         }
         //TODO: Remove alarm from alarm manager
+        lnManager.alarmModels.remove(atOffsets: offsets)
     }
 }
 
