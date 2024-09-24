@@ -2,25 +2,30 @@ import SwiftUI
 
 struct ListOfAlarmView: View {
     
-    var alarms: [AlarmModel]
+    @EnvironmentObject var lnManager: LocalNotificationManager
+    @State var isActive: Bool = false
+    @State var currentIndex: Int? = nil
     
     var body: some View {
         NavigationStack {
             ZStack {
                 List {
-                    ForEach(0..<alarms.count, id: \.self) { index in
-                        let alarm = alarms[index]
-                        NavigationLink(
-                            destination: {
-                                MainAddEditAlarmView(
-                                    currentAlarmIndex: index,
-                                    alarmModel: alarm
-                                )
+                    ForEach(lnManager.alarmModels.indices, id: \.self) { index in
+                        
+                        let alarm = lnManager.alarmModels[index]
+                        
+                        Button(
+                            action: {
+                                currentIndex = index
+                                isActive.toggle()
                             },
                             label: {
                                 AlarmRowView(model: alarm, index: index)
-                            })
+                                    .padding()
+                            }
+                        )
                     }
+                    .onDelete(perform: deleteAlarm)
                 }
                 FourCoolCirclesView().opacity(0.3)
             }
@@ -48,8 +53,16 @@ struct ListOfAlarmView: View {
             }
         }
     }
+    
+    func deleteAlarm(offsets: IndexSet) {
+        for index in offsets {
+            //TODO: Remove reqquest from given id
+        }
+        //TODO: Remove alarm from alarm manager
+    }
 }
 
 #Preview {
-    ListOfAlarmView(alarms: AlarmModel.DummyAlarmData())
+    ListOfAlarmView()
+        .environmentObject(LocalNotificationManager())
 }
