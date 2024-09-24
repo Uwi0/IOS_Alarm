@@ -56,9 +56,8 @@ struct ListOfAlarmView: View {
     
     func deleteAlarm(offsets: IndexSet) {
         for index in offsets {
-            //TODO: Remove reqquest from given id
+            lnManager.removeRequest(id: lnManager.alarmModels[index].id)
         }
-        //TODO: Remove alarm from alarm manager
         lnManager.alarmModels.remove(atOffsets: offsets)
     }
 }

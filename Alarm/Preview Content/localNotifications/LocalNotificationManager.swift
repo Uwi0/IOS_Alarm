@@ -64,10 +64,9 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         pendingAlarms = await notificationCenter.pendingNotificationRequests()
     }
     
-    func removeRequest(id: String, index: Int?) {
+    func removeRequest(id: String) {
         if let index = pendingAlarms.firstIndex(where: { $0.identifier == id }) {
             pendingAlarms.remove(at: index)
-            alarmModels.remove(at: index)
         }
     }
     

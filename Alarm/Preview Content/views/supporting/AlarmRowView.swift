@@ -42,12 +42,11 @@ struct AlarmRowView: View {
         .onChange(of: model.alarmEnabled) {
             if model.alarmEnabled {
                 print("Enable alarm")
-                //TODO: Enable Alarm
-                //TODO: Need Schedule Alarm
+                Task {
+                    await lnManager.schedule(localNotification: model)
+                }
             } else {
-                print("Disable alarm")
-                //TODO: Disable Alarm
-                //TODO: Remove Alarm
+                lnManager.removeRequest(id: model.id)
             }
         }
         
