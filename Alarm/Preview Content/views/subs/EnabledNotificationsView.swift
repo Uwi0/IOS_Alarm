@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct EnabledNotificationsView: View {
+    
+    @EnvironmentObject var lnManager: LocalNotificationManager
+    
     var body: some View {
         ZStack {
             FourCoolCirclesView()
@@ -14,6 +17,7 @@ struct EnabledNotificationsView: View {
                 Spacer()
                 Button(
                     action: {
+                        lnManager.openSettings()
                     },
                     label: {
                         ButtonView(text: "Enable")
@@ -27,4 +31,5 @@ struct EnabledNotificationsView: View {
 
 #Preview {
     EnabledNotificationsView()
+        .environmentObject(LocalNotificationManager())
 }

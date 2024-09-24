@@ -1,7 +1,25 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    "%@" : {
+
+    },
+    "+" : {
+
+    },
     "About" : {
+
+    },
+    "Alarm" : {
+
+    },
+    "Alarms" : {
+
+    },
+    "Cancel" : {
 
     },
     "Enable" : {
@@ -10,25 +28,37 @@
     "Enabled Notifications, please" : {
 
     },
+    "End" : {
+
+    },
     "Hello there" : {
 
     },
-    "Hello, world!" : {
-
-    },
-    "Hello, World!" : {
-
-    },
     "let's add an alarm" : {
+
+    },
+    "Off" : {
+
+    },
+    "On" : {
+
+    },
+    "Save" : {
+
+    },
+    "Set the Alarm" : {
+
+    },
+    "Sound" : {
+
+    },
+    "Start" : {
 
     },
     "The UI for this nice Alarm app was largely inspired by the amazing work of Anton Leogky." : {
 
     },
     "to Anton's page" : {
-
-    },
-    "ToBeWakeUpView" : {
 
     },
     "you did it! here you can manage your alarm, change time and other things" : {
