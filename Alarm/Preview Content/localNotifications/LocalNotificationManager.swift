@@ -64,6 +64,13 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         pendingAlarms = await notificationCenter.pendingNotificationRequests()
     }
     
+    func removeRequest(id: String, index: Int?) {
+        if let index = pendingAlarms.firstIndex(where: { $0.identifier == id }) {
+            pendingAlarms.remove(at: index)
+            alarmModels.remove(at: index)
+        }
+    }
+    
     private func saveItems() {
         if let endcodeDate = try? JSONEncoder().encode(alarmModels) {
             UserDefaults.standard.set(endcodeDate, forKey: itemKey)
