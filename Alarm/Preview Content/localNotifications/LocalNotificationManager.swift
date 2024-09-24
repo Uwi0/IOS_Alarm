@@ -51,8 +51,17 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
     
     func schedule(localNotification: AlarmModel) async {
         let content = UNMutableNotificationContent()
+        let dateComponents = localNotification.endDateComponent
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: localNotification.id,
+            content: content,
+            trigger: trigger
+        )
         content.body = NSLocalizedString(localNotification.body, comment: "")
         content.sound = customSound(soundName: localNotification.sound)
+        try? await notificationCenter.add(request)
+        pendingAlarms = await notificationCenter.pendingNotificationRequests()
     }
     
     private func saveItems() {
