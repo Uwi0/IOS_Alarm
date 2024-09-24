@@ -45,6 +45,10 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         }
     }
     
+    func getPendingAlarms() async {
+        pendingAlarms = await notificationCenter.pendingNotificationRequests()
+    }
+    
     private func saveItems() {
         if let endcodeDate = try? JSONEncoder().encode(alarmModels) {
             UserDefaults.standard.set(endcodeDate, forKey: itemKey)

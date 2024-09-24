@@ -29,6 +29,7 @@ struct MainAlarmView: View {
             if scenePhase == ScenePhase.active {
                 Task {
                     await lnManager.getCurrentSettings()
+                    await lnManager.getPendingAlarms()
                 }
             }
         }
