@@ -1,6 +1,6 @@
 import Foundation
 
-enum Sounds: String, CaseIterable {
+enum Sounds: String, CaseIterable, Codable {
     // Ringtone Sounds
     case wake_up = "Sound Wake up.aiff"
     case lagrima = "Lagrima.aiff"

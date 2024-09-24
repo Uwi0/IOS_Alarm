@@ -3,8 +3,27 @@ import NotificationCenter
 
 @MainActor
 class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
-     let notificationCenter = UNUserNotificationCenter.current()
+    let notificationCenter = UNUserNotificationCenter.current()
     @Published var isAuthorized: Bool = false
+    @Published var pendingAlarms: [UNNotificationRequest] = []
+    @Published var alarmModels: [AlarmModel] = [] {
+        didSet {
+            saveItems()
+        }
+    }
+    
+    private let itemKey = "Alarm List"
+    
+    override init() {
+        super.init()
+        //TODO: Want alarm to go off when app is also active
+        
+        
+        guard let data = UserDefaults.standard.data(forKey: itemKey),
+              let savedItems = try? JSONDecoder().decode([AlarmModel].self, from: data)
+        else { return }
+        self.alarmModels = savedItems
+    }
     
     func requestAuthorization() async throws {
         try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
@@ -23,6 +42,12 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
                     await UIApplication.shared.open(url)
                 }
             }
+        }
+    }
+    
+    private func saveItems() {
+        if let endcodeDate = try? JSONEncoder().encode(alarmModels) {
+            UserDefaults.standard.set(endcodeDate, forKey: itemKey)
         }
     }
 }
