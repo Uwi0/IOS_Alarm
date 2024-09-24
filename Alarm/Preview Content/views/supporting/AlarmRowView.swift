@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AlarmRowView: View {
+    @EnvironmentObject var lnManager: LocalNotificationManager
     let model: AlarmModel
     let index: Int
     
@@ -13,6 +14,12 @@ struct AlarmRowView: View {
     private var opacity: Double {
         model.alarmEnabled ? 1 : 0.7
     }
+    private var alarmText: String {
+        let alarmTime: (Date) -> String = { date in
+            getTimeFromDate(date: date)
+        }
+        return "\(alarmTime(model.start)) - \(alarmTime(model.end))"
+    }
     
     var body: some View {
         HStack {
@@ -20,14 +27,28 @@ struct AlarmRowView: View {
                 .foregroundStyle(model.activityColor)
                 .font(.title)
             
-            Text("\(getTimeFromDate(date: model.end))")
+            Text("\(alarmText)")
                 .fontWeight(fontWeight)
                 .scaleEffect(scaleEffect)
                 .opacity(opacity)
             Spacer()
             
             //TODO: change this later
-            TheToggleView(isOn: .constant(model.alarmEnabled))
+            if index < lnManager.alarmModels.count {
+                TheToggleView(isOn: .constant(lnManager.alarmModels[index].alarmEnabled))
+            }
+            
+        }
+        .onChange(of: model.alarmEnabled) {
+            if model.alarmEnabled {
+                print("Enable alarm")
+                //TODO: Enable Alarm
+                //TODO: Need Schedule Alarm
+            } else {
+                print("Disable alarm")
+                //TODO: Disable Alarm
+                //TODO: Remove Alarm
+            }
         }
         
     }
@@ -35,4 +56,5 @@ struct AlarmRowView: View {
 
 #Preview {
     AlarmRowView(model: .DefaultAlarm(), index: 0)
+        .environmentObject(LocalNotificationManager())
 }
