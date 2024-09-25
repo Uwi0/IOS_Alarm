@@ -30,6 +30,9 @@ struct ListOfAlarmView: View {
                 FourCoolCirclesView().opacity(0.3)
             }
             .navigationTitle("Alarms")
+            .sheet(isPresented: $isActive, onDismiss: {}){
+                AddEditAlarmView(currentAlarmIndex: currentIndex)
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     NavigationLink(
