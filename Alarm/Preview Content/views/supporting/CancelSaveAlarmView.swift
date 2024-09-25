@@ -3,13 +3,15 @@ import SwiftUI
 struct CancelSaveAlarmView: View {
     let currentAlarmIndex: Int?
     @Binding var alarmModel: AlarmModel
-    
+    @EnvironmentObject var lnManager: LocalNotificationManager
+    @Environment(\.presentationMode) var presentation
 
     var body: some View {
         HStack {
             Button(
                 action: {
-                    
+                    print("cancel create alarm")
+                    self.presentation.wrappedValue.dismiss()
                 },
                 label: {
                     Text("Cancel")
@@ -18,11 +20,13 @@ struct CancelSaveAlarmView: View {
             Spacer()
             Button(
                 action: {
+                    print("save alarm")
                     if let currentAlarmIndex {
-                        //TODO: edit alarm to view model
+                        lnManager.alarmModels[currentAlarmIndex] = alarmModel
                     } else {
-                        //TODO: Append alarm to view model
+                        lnManager.safeAppend(localNotification: alarmModel)
                     }
+                    self.presentation.wrappedValue.dismiss()
                 },
                 label: {
                     Text("Save")
@@ -35,4 +39,5 @@ struct CancelSaveAlarmView: View {
 
 #Preview {
     CancelSaveAlarmView(currentAlarmIndex: nil, alarmModel: .constant(.DefaultAlarm()))
+        .environmentObject(LocalNotificationManager())
 }

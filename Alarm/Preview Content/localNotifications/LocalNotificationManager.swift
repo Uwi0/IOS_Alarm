@@ -70,6 +70,17 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         }
     }
     
+    func safeAppend(localNotification: AlarmModel) {
+        if let index = alarmModels.firstIndex(where: { $0.id == localNotification.id }) {
+            print("Alarm already exist so donot append....")
+            print("Update The Alarm")
+            alarmModels[index] = localNotification
+        } else {
+            alarmModels.append(localNotification)
+        }
+        alarmModels = alarmModels.sorted(by: { $0.endTime < $1.endTime })
+    }
+    
     private func saveItems() {
         if let endcodeDate = try? JSONEncoder().encode(alarmModels) {
             UserDefaults.standard.set(endcodeDate, forKey: itemKey)
