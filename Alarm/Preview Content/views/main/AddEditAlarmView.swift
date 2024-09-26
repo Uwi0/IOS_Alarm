@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AddEditAlarmView: View {
     
-    let currentAlarmIndex: Int?
+    @Binding var currentAlarmIndex: Int?
     @State private var showYouDitItView = true
     @EnvironmentObject var lnManager: LocalNotificationManager
 
@@ -39,6 +39,6 @@ struct AddEditAlarmView: View {
 }
 
 #Preview {
-    AddEditAlarmView(currentAlarmIndex: nil)
+    AddEditAlarmView(currentAlarmIndex: .constant(nil))
         .environmentObject(LocalNotificationManager())
 }

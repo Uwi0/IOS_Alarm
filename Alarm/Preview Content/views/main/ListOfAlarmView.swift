@@ -31,15 +31,14 @@ struct ListOfAlarmView: View {
             }
             .navigationTitle("Alarms")
             .sheet(isPresented: $isActive, onDismiss: {}){
-                AddEditAlarmView(currentAlarmIndex: currentIndex)
+                AddEditAlarmView(currentAlarmIndex: $currentIndex)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     NavigationLink(
                         destination: {
                             MainAddEditAlarmView(
-                                currentAlarmIndex: nil,
-                                alarmModel: .DefaultAlarm()
+                                alarmModel: .DefaultAlarm(), currentAlarmIndex: nil
                             )
                         },
                         label: {
