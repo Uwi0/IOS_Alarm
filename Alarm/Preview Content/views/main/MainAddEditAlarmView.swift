@@ -11,7 +11,7 @@ struct MainAddEditAlarmView: View {
             .tag("One")
             
             AddEditCircularAlarmView(
-                currentAlarmIndex: currentAlarmIndex,
+                currentAlarmIndex: $currentAlarmIndex,
                 alarmModel: alarmModel
             )
             .tag("Two")

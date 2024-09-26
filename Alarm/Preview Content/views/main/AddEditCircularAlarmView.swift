@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddEditCircularAlarmView: View {
-    let currentAlarmIndex: Int?
+    @Binding var currentAlarmIndex: Int?
     @State var alarmModel: AlarmModel
     var body: some View {
         VStack {
@@ -15,7 +15,7 @@ struct AddEditCircularAlarmView: View {
             CircularTimeView(
                 currentAlarmIndex: currentAlarmIndex,
                 size: screenWidth / 2,
-                alarmModel: alarmModel
+                alarmModel: $alarmModel
             )
             Spacer()
             SelectActivityExpandedView(
@@ -29,5 +29,5 @@ struct AddEditCircularAlarmView: View {
 }
 
 #Preview {
-    AddEditCircularAlarmView(currentAlarmIndex: nil, alarmModel: .DefaultAlarm())
+    AddEditCircularAlarmView(currentAlarmIndex: .constant(nil), alarmModel: .DefaultAlarm())
 }

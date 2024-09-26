@@ -20,7 +20,8 @@ struct SelectActivityExpandedView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 SecondColumnOfActivityIconView(
                     currentActivity: currentActivity,
-                    currentColor: currentColor
+                    currentColor: currentColor,
+                    onSelectedActivity: { activity in currentActivity = activity}
                 )
             }
         }
@@ -69,8 +70,9 @@ private struct FirstColumnOfActivityIconView: View {
 
 private struct SecondColumnOfActivityIconView: View {
     
-    @State var currentActivity: String
+    let currentActivity: String
     let currentColor: Color
+    var onSelectedActivity: (String) -> Void
     
     var body: some View {
         HStack {
@@ -83,7 +85,7 @@ private struct SecondColumnOfActivityIconView: View {
                     .opacity(isSelected ? 1.0 : 0.7)
                     .onTapGesture {
                         withAnimation{
-                            currentActivity = activity
+                            onSelectedActivity(activity)
                         }
                     }
                     .padding()

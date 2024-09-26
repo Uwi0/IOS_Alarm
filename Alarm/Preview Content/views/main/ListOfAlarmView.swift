@@ -1,10 +1,12 @@
 import SwiftUI
 
+
 struct ListOfAlarmView: View {
     
     @EnvironmentObject var lnManager: LocalNotificationManager
     @State var isActive: Bool = false
     @State var currentIndex: Int? = nil
+    @State var selectedAlarm: AlarmType = .circular
     
     var body: some View {
         NavigationStack {
@@ -31,7 +33,8 @@ struct ListOfAlarmView: View {
             }
             .navigationTitle("Alarms")
             .sheet(isPresented: $isActive, onDismiss: {}){
-                AddEditAlarmView(currentAlarmIndex: $currentIndex)
+                AlarmSelectorModeView(selectedAlarm: $selectedAlarm, currentIndex: $currentIndex)
+                
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
