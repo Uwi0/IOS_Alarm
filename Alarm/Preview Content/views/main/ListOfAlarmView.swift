@@ -35,11 +35,9 @@ struct ListOfAlarmView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
-                    NavigationLink(
-                        destination: {
-                            MainAddEditAlarmView(
-                                alarmModel: .DefaultAlarm(), currentAlarmIndex: nil
-                            )
+                    Button(
+                        action: {
+                            isActive.toggle()
                         },
                         label: {
                             Text("+")
