@@ -6,22 +6,25 @@ struct ListOfAlarmView: View {
     @EnvironmentObject var lnManager: LocalNotificationManager
     @State var isActive: Bool = false
     @State var currentIndex: Int? = nil
-    @State var selectedAlarm: AlarmType = .circular
+    @State var selectedAlarm: AlarmType = .standard
     
     var body: some View {
         NavigationStack {
             ZStack {
-                List {
-                    ForEach(lnManager.alarmModels.indices, id: \.self) { index in
-                        AlarmRowButtonView(
-                            index: index,
-                            onClick: { index in
-                                currentIndex = index
-                                isActive.toggle()
-                            }
-                        ).padding()
+                VStack {
+                    List {
+                        ForEach(lnManager.alarmModels.indices, id: \.self) { index in
+                            AlarmRowButtonView(
+                                index: index,
+                                onClick: { index in
+                                    currentIndex = index
+                                    isActive.toggle()
+                                }
+                            ).padding()
+                        }
+                        .onDelete(perform: deleteAlarm)
                     }
-                    .onDelete(perform: deleteAlarm)
+                    SelectUIView(selectedType: $selectedAlarm, isActive: $isActive)
                 }
                 FourCoolCirclesView().opacity(0.3)
             }
