@@ -13,19 +13,13 @@ struct ListOfAlarmView: View {
             ZStack {
                 List {
                     ForEach(lnManager.alarmModels.indices, id: \.self) { index in
-                        
-                        let alarm = lnManager.alarmModels[index]
-                        
-                        Button(
-                            action: {
+                        AlarmRowButtonView(
+                            index: index,
+                            onClick: { index in
                                 currentIndex = index
                                 isActive.toggle()
-                            },
-                            label: {
-                                AlarmRowView(model: alarm, index: index)
-                                    .padding()
                             }
-                        )
+                        ).padding()
                     }
                     .onDelete(perform: deleteAlarm)
                 }

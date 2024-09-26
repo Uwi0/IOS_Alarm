@@ -1,11 +1,19 @@
 import SwiftUI
 
 struct AlarmRowButtonView: View {
+    let index: Int
+    let onClick: (_ index: Int) -> Void
     var body: some View {
-        Text("Hello, World!")
+        Button(
+            action: { onClick(index)},
+            label: {
+                AlarmRowView(index: index)
+            }
+        )
     }
 }
 
 #Preview {
-    AlarmRowButtonView()
+    AlarmRowButtonView(index: 0, onClick: { _ in })
+        .environmentObject(LocalNotificationManager())
 }

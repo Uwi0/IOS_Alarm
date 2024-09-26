@@ -1,9 +1,17 @@
 import SwiftUI
 
 struct AlarmRowView: View {
-    @EnvironmentObject var lnManager: LocalNotificationManager
-    let model: AlarmModel
+    
     let index: Int
+    @EnvironmentObject var lnManager: LocalNotificationManager
+    
+    private var model: AlarmModel {
+        if lnManager.alarmModels.isEmpty {
+            return AlarmModel.DummyAlarmData()[index]
+        } else {
+            return lnManager.alarmModels[index]
+        }
+    }
     
     private var fontWeight: Font.Weight {
         model.alarmEnabled ? .regular : .thin
@@ -27,15 +35,16 @@ struct AlarmRowView: View {
                 .foregroundStyle(model.activityColor)
                 .font(.title)
             
+            Spacer()
+            
             Text("\(alarmText)")
                 .fontWeight(fontWeight)
                 .scaleEffect(scaleEffect)
                 .opacity(opacity)
             Spacer()
             
-            //TODO: change this later
             if index < lnManager.alarmModels.count {
-                TheToggleView(isOn: .constant(lnManager.alarmModels[index].alarmEnabled))
+                TheToggleView(isOn: $lnManager.alarmModels[index].alarmEnabled)
             }
             
         }
@@ -54,6 +63,6 @@ struct AlarmRowView: View {
 }
 
 #Preview {
-    AlarmRowView(model: .DefaultAlarm(), index: 0)
+    AlarmRowView(index: 0)
         .environmentObject(LocalNotificationManager())
 }
